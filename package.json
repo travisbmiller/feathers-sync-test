@@ -1,0 +1,20 @@
+{
+  "name": "feathersync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "feathers": "^2.0.3",
+    "feathers-hooks": "^1.7.1",
+    "feathers-mongoose": "^3.6.1",
+    "feathers-rest": "^1.5.2",
+    "feathers-socketio": "^1.4.2",
+    "feathers-sync": "^0.1.2",
+    "mongoose": "^4.7.5"
+  }
+}
