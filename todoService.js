@@ -1,15 +1,4 @@
-// const myService = {
-//   find(params ) {},
-//   get(id, params ) {},
-//   create(data, params ) {
-//     console.log('CREATED')
-//     return Promise.resolve('dd');
-//   },
-//   update(id, data, params) {},
-//   patch(id, data, params ) {},
-//   remove(id, params ) {},
-//   setup(app, path) {}
-// }
+
 
 'use strict';
 
@@ -23,10 +12,10 @@ module.exports = function () {
   };
 
   // Initialize our service with any options it requires
-  app.use('/todos', service(options));
+  app.use('/todo-mongoose', service(options));
 
   // Get our initialize service to that we can bind hooks
-  const todoService = app.service('/todos');
+  const todoService = app.service('/todo-mongoose');
 
   // Set up our before hooks
   todoService.before({

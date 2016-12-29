@@ -5,7 +5,18 @@
   var client = feathers()
     .configure(feathers.hooks())
     .configure(feathers.socketio(socket));
-  var todoService = client.service('todos');
+  
+  var todoMongooseService = client.service('todo-mongoose');
+  var todoService = client.service('todo');
+
+  todoMongooseService.on('created', function(todo) {
+    console.log('Someone created a todo with mongoose service', todo);
+  });
+
+  todoMongooseService.create({
+    message: 'testing'
+  })
+  .then(result => console.log(result))
 
   todoService.on('created', function(todo) {
     console.log('Someone created a todo', todo);
@@ -15,4 +26,6 @@
     message: 'testing'
   })
   .then(result => console.log(result))
+
+
 </script>

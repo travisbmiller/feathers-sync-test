@@ -4,12 +4,15 @@ const sync = require('feathers-sync');
 const socketio = require('feathers-socketio');
 const rest = require('feathers-rest');
 const serveStatic = require('feathers').static;
-const todoService = require('./todoService');
+const todoMongooseService = require('./todoService');
 const mongoose = require('mongoose');
 const hooks = require('feathers-hooks');
 
+mongoose.connect('mongodb://localhost:27017/sync');
+mongoose.Promise = global.Promise;
 
 var app = feathers();
+
 app.configure(rest())
   .configure(socketio())
   .configure(sync({
@@ -18,10 +21,20 @@ app.configure(rest())
   }))
   .use('/', serveStatic(path.resolve(__dirname, 'public')))
   .configure(hooks())
-  .configure(todoService);
+  .configure(todoMongooseService)
+  .use('/todo', {
+    find(params ) {},
+    get(id, params ) {},
+    create(data, params ) {
+      console.log('CREATED')
+      return Promise.resolve(data);
+    },
+    update(id, data, params) {},
+    patch(id, data, params ) {},
+    remove(id, params ) {},
+    setup(app, path) {}
+  });
 
-mongoose.connect('mongodb://localhost:27017/sync');
-mongoose.Promise = global.Promise;
 
 
 app.listen(3000);
